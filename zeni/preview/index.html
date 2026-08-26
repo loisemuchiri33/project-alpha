@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>ZENI — Live Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green: #0B6E4F;
+    --green-dark: #085540;
+    --green-soft: #E6F4EF;
+    --mint: #14B87A;
+    --bg: #F4F7F6;
+    --card: #FFFFFF;
+    --text: #0F1F1A;
+    --muted: #5B6B65;
+    --line: #E2EAE6;
+    --danger: #D64545;
+    --shadow: 0 12px 40px rgba(11, 110, 79, 0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    background: linear-gradient(160deg, #0a3d2e 0%, #0B6E4F 40%, #124f3c 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    padding: 32px 16px;
+    color: var(--text);
+  }
+  .stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .label {
+    color: #d7f5e9;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .phone {
+    width: 390px;
+    height: 844px;
+    background: #0b0f0e;
+    border-radius: 44px;
+    padding: 12px;
+    box-shadow: 0 40px 80px rgba(0,0,0,.45), inset 0 0 0 2px #1c2a25;
+    position: relative;
+  }
+  .phone::before {
+    content: "";
+    position: absolute;
+    top: 18px; left: 50%;
+    transform: translateX(-50%);
+    width: 120px; height: 28px;
+    background: #0b0f0e;
+    border-radius: 0 0 18px 18px;
+    z-index: 5;
+  }
+  .screen {
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    border-radius: 34px;
+    overflow: hidden;
+    position: relative;
+  }
+  .view { display: none; height: 100%; flex-direction: column; }
+  .view.active { display: flex; }
+
+  /* splash */
+  #splash {
+    background: linear-gradient(165deg, #0B6E4F, #083b2b);
+    color: white;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+  .logo-mark {
+    width: 92px; height: 92px;
+    border-radius: 28px;
+    background: rgba(255,255,255,.12);
+    display: grid; place-items: center;
+    font-weight: 800; font-size: 34px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,.2);
+  }
+  #splash h1 { font-size: 40px; letter-spacing: -0.03em; }
+  #splash p { opacity: .8; font-size: 15px; }
+
+  /* common chrome */
+  .status {
+    height: 48px;
+    padding: 14px 24px 0;
+    display: flex; justify-content: space-between;
+    font-size: 12px; font-weight: 600; color: #1a2b24;
+  }
+  .content { flex: 1; overflow-y: auto; padding: 8px 22px 24px; }
+  .bottom-nav {
+    height: 72px;
+    border-top: 1px solid var(--line);
+    background: white;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding-bottom: 10px;
+  }
+  .nav-item {
+    border: 0; background: none; color: var(--muted);
+    font-size: 11px; font-weight: 600;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    cursor: pointer;
+  }
+  .nav-item.active { color: var(--green); }
+  .nav-item .ico { font-size: 18px; }
+
+  h2 { font-size: 28px; letter-spacing: -0.03em; margin-bottom: 6px; }
+  .sub { color: var(--muted); font-size: 15px; margin-bottom: 28px; }
+  label { display:block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #243830; }
+  .field {
+    width: 100%; border: 1.5px solid var(--line); border-radius: 14px;
+    padding: 16px 14px; font-size: 16px; margin-bottom: 16px; background: white;
+    outline: none; font-family: inherit;
+  }
+  .field:focus { border-color: var(--green); box-shadow: 0 0 0 4px rgba(11,110,79,.12); }
+  .btn {
+    width: 100%; border: 0; border-radius: 16px; padding: 16px;
+    background: var(--green); color: white; font-weight: 700; font-size: 16px;
+    cursor: pointer; font-family: inherit;
+  }
+  .btn:hover { background: var(--green-dark); }
+  .btn.secondary { background: var(--green-soft); color: var(--green); }
+  .btn.ghost { background: transparent; color: var(--green); }
+  .link { text-align: center; margin-top: 18px; color: var(--green); font-weight: 600; font-size: 14px; cursor: pointer; }
+  .api-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-soft); color: var(--green); border-radius: 999px;
+    padding: 8px 12px; font-size: 12px; font-weight: 700; margin-bottom: 18px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #aaa; }
+  .dot.ok { background: #16a34a; box-shadow: 0 0 0 4px rgba(22,163,74,.15); }
+  .dot.bad { background: var(--danger); }
+
+  .hero-card {
+    background: linear-gradient(135deg, #0B6E4F, #14B87A);
+    color: white; border-radius: 24px; padding: 22px;
+    box-shadow: var(--shadow); margin-bottom: 18px;
+  }
+  .hero-card .kicker { opacity: .85; font-size: 13px; font-weight: 600; }
+  .hero-card .amt { font-size: 36px; font-weight: 800; letter-spacing: -0.03em; margin: 6px 0 14px; }
+  .hero-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .hero-actions button {
+    border: 0; border-radius: 12px; padding: 12px; font-weight: 700;
+    font-family: inherit; cursor: pointer;
+  }
+  .hero-actions .primary { background: white; color: var(--green); }
+  .hero-actions .soft { background: rgba(255,255,255,.18); color: white; }
+
+  .section-title {
+    display: flex; justify-content: space-between; align-items: center;
+    margin: 8px 0 12px; font-weight: 700;
+  }
+  .section-title span { color: var(--green); font-size: 13px; cursor: pointer; }
+  .loan-list { display: flex; flex-direction: column; gap: 12px; }
+  .loan-card {
+    background: white; border-radius: 18px; padding: 16px;
+    border: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px;
+  }
+  .loan-card h4 { font-size: 16px; margin-bottom: 4px; }
+  .loan-card p { color: var(--muted); font-size: 13px; }
+  .badge {
+    align-self: start; font-size: 11px; font-weight: 700;
+    padding: 4px 8px; border-radius: 999px; background: #FEF3C7; color: #B45309;
+  }
+  .badge.active { background: var(--green-soft); color: var(--green); }
+  .badge.paid { background: #E8EEF9; color: #3557A0; }
+
+  .quick {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 8px;
+  }
+  .quick button {
+    border: 0; background: white; border-radius: 16px; padding: 14px 6px;
+    border: 1px solid var(--line); font-weight: 600; font-size: 11px; color: var(--text);
+    cursor: pointer; font-family: inherit;
+  }
+  .quick .qico {
+    width: 36px; height: 36px; border-radius: 12px; margin: 0 auto 8px;
+    display: grid; place-items: center; background: var(--green-soft); color: var(--green); font-size: 16px;
+  }
+
+  .toolbar {
+    position: fixed; left: 24px; bottom: 24px; right: 24px;
+    display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; z-index: 20;
+  }
+  .toolbar button {
+    border: 0; border-radius: 999px; padding: 12px 16px;
+    background: rgba(255,255,255,.12); color: white; font-weight: 700;
+    backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.2);
+    cursor: pointer; font-family: inherit;
+  }
+  .toolbar button.active { background: white; color: var(--green); }
+
+  .side {
+    max-width: 360px; color: #e8fff6;
+  }
+  .side h1 { font-size: 42px; letter-spacing: -0.04em; margin-bottom: 12px; }
+  .side p { opacity: .85; line-height: 1.6; margin-bottom: 18px; }
+  .side .box {
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+    border-radius: 18px; padding: 18px; font-size: 14px; line-height: 1.55;
+  }
+  .side code {
+    background: rgba(0,0,0,.25); padding: 2px 6px; border-radius: 6px; font-size: 12px;
+  }
+  .err { color: var(--danger); font-size: 13px; min-height: 18px; margin-bottom: 8px; }
+  .toast {
+    position: absolute; left: 16px; right: 16px; bottom: 88px;
+    background: #12352a; color: white; border-radius: 14px; padding: 14px 16px;
+    font-size: 13px; display: none; z-index: 8;
+  }
+  .apply-amt { font-size: 42px; font-weight: 800; text-align: center; margin: 18px 0 8px; color: var(--green); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; justify-content: center; }
+  .chips button {
+    border: 1px solid var(--line); background: white; border-radius: 999px;
+    padding: 10px 14px; font-weight: 700; cursor: pointer; font-family: inherit;
+  }
+  .chips button.on { background: var(--green); color: white; border-color: var(--green); }
+  @media (max-width: 980px) {
+    body { flex-direction: column; }
+    .side { text-align: center; }
+  }
+</style>
+</head>
+<body>
+  <div class="side">
+    <h1>ZENI live preview</h1>
+    <p>Mobile UI mock driven by the real Go API health check in this environment. Your Flutter app will look and flow like this in Android Studio.</p>
+    <div class="box">
+      <div><strong>API:</strong> <span id="apiStatusText">checking…</span></div>
+      <div style="margin-top:8px"><strong>Endpoint:</strong> <code id="apiUrl">http://localhost:8080/health</code></div>
+      <div style="margin-top:8px"><strong>Note:</strong> Full login needs Postgres + Redis via Docker on your machine. Here you can walk through every screen.</div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="label">Smartphone preview · Flutter mobile UI</div>
+    <div class="phone">
+      <div class="screen">
+        <div id="toast" class="toast"></div>
+
+        <!-- SPLASH -->
+        <div class="view active" id="splash">
+          <div class="logo-mark">Z</div>
+          <h1>ZENI</h1>
+          <p>Smart Loans. Secure Future.</p>
+        </div>
+
+        <!-- LOGIN -->
+        <div class="view" id="login">
+          <div class="status"><span>9:41</span><span>LTE ●</span></div>
+          <div class="content" style="padding-top:28px">
+            <div class="api-pill"><span class="dot" id="apiDot"></span> <span id="apiPillText">API offline</span></div>
+            <h2>Welcome back</h2>
+            <p class="sub">Sign in to ZENI</p>
+            <label>Phone Number</label>
+            <input class="field" id="phone" value="0712345678" placeholder="0712 345 678" />
+            <label>Password</label>
+            <input class="field" id="password" type="password" value="Str0ngPass!" placeholder="••••••••" />
+            <div class="err" id="loginErr"></div>
+            <button class="btn" onclick="tryLogin()">Sign In</button>
+            <div class="link" onclick="show('register')">Don't have an account? Register</div>
+            <button class="btn ghost" style="margin-top:8px" onclick="demoEnter()">Enter demo home</button>
+          </div>
+        </div>
+
+        <!-- REGISTER -->
+        <div class="view" id="register">
+          <div class="status"><span>9:41</span><span>LTE ●</span></div>
+          <div class="content" style="padding-top:28px">
+            <h2>Create account</h2>
+            <p class="sub">Borrow smarter with ZENI</p>
+            <label>Full name</label>
+            <input class="field" placeholder="Amina Wanjiku" />
+            <label>Phone Number</label>
+            <input class="field" placeholder="0712 345 678" />
+            <label>Password</label>
+            <input class="field" type="password" placeholder="Min 8 characters" />
+            <button class="btn" onclick="show('otp')">Continue</button>
+            <div class="link" onclick="show('login')">Already have an account? Sign in</div>
+          </div>
+        </div>
+
+        <!-- OTP -->
+        <div class="view" id="otp">
+          <div class="status"><span>9:41</span><span>LTE ●</span></div>
+          <div class="content" style="padding-top:40px">
+            <h2>Verify phone</h2>
+            <p class="sub">Enter the 6-digit code sent to your M-Pesa number</p>
+            <input class="field" maxlength="6" placeholder="• • • • • •" style="letter-spacing:12px;text-align:center;font-size:24px;font-weight:700" />
+            <button class="btn" onclick="show('home')">Verify & continue</button>
+            <div class="link">Resend code in 0:28</div>
+          </div>
+        </div>
+
+        <!-- HOME -->
+        <div class="view" id="home">
+          <div class="status"><span>9:41</span><span>LTE ●</span></div>
+          <div class="content">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0 16px">
+              <div>
+                <div style="color:var(--muted);font-size:13px;font-weight:600">Habari, Amina</div>
+                <div style="font-size:20px;font-weight:800">Your limit is ready</div>
+              </div>
+              <div style="width:40px;height:40px;border-radius:14px;background:var(--green-soft);display:grid;place-items:center;font-weight:800;color:var(--green)">A</div>
+            </div>
+
+            <div class="hero-card">
+              <div class="kicker">Available credit · KES</div>
+              <div class="amt">15,000</div>
+              <div class="hero-actions">
+                <button class="primary" onclick="show('apply')">Get loan</button>
+                <button class="soft" onclick="show('payments')">Repay</button>
+              </div>
+            </div>
+
+            <div class="quick">
+              <button onclick="show('apply')"><div class="qico">💸</div>Borrow</button>
+              <button onclick="show('payments')"><div class="qico">📱</div>M-Pesa</button>
+              <button onclick="show('kyc')"><div class="qico">🪪</div>KYC</button>
+              <button onclick="toast('Support chat opens in the Flutter app')"><div class="qico">💬</div>Help</button>
+            </div>
+
+            <div class="section-title">Recent loans <span onclick="show('loans')">See all</span></div>
+            <div class="loan-list">
+              <div class="loan-card">
+                <div>
+                  <h4>KES 10,000</h4>
+                  <p>Due 12 Aug · 15% p.a.</p>
+                </div>
+                <span class="badge active">Active</span>
+              </div>
+              <div class="loan-card">
+                <div>
+                  <h4>KES 5,000</h4>
+                  <p>Cleared 3 Jul · On time</p>
+                </div>
+                <span class="badge paid">Paid</span>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-nav">
+            <button class="nav-item active" onclick="show('home')"><span class="ico">🏠</span>Home</button>
+            <button class="nav-item" onclick="show('loans')"><span class="ico">📄</span>Loans</button>
+            <button class="nav-item" onclick="show('payments')"><span class="ico">💳</span>Pay</button>
+            <button class="nav-item" onclick="show('profile')"><span class="ico">👤</span>Me</button>
+          </div>
+        </div>
+
+        <!-- APPLY -->
+        <div class="view" id="apply">
+          <div class="status"><span>9:41</span><span>LTE ●</span></div>
+          <div class="content" style="padding-top:20px">
+            <div class="link" style="text-align:left;margin:0 0 12px" onclick="show('home')">← Back</div>
+            <h2>Apply for a loan</h2>
+            <p class="sub">Ladder: 5k → 35k based on repayment history</p>
+            <div class="apply-amt" id="amtLabel">KES 10,000</div>
+            <div class="chips">
+              <button class="on" onclick="setAmt(this,10000)">10,000</button>
+              <button onclick="setAmt(this,15000)">15,000</button>
+              <button onclick="setAmt(this,20000)">20,000</button>
+              <button onclick="setAmt(this,25000)">25,000</button>
+            </div>
+            <label>Duration</label>
+            <select class="field">
+              <option>14 days</option>
+              <option selected>30 days</option>
+              <option>60 days</option>
+            </select>
+            <label>Purpose</label>
+            <input class="field" value="Business stock" />
+            <button class="btn" onclick="toast('Application submitted · status: pending (fraud score: allow)'); show('loans')">Submit application</button>
+          </div>
+        </div>
+
+        <!-- LOANS -->
+        <div class="view" id="loans">
+          <div class="status"><span>9:41</span><span>LTE ●</span></div>
+          <div class="content" style="padding-top:20px">
+            <h2>My loans</h2>
+            <p class="sub">Track active balances and history</p>
+            <div class="loan-list">
+              <div class="loan-card">
+                <div>
+                  <h4>KES 10,000</h4>
+                  <p>Outstanding KES 11,150 · Due 12 Aug</p>
+                </div>
+                <span class="badge active">Active</span>
+              </div>
+              <div class="loan-card">
+                <div>
+                  <h4>KES 15,000</h4>
+                  <p>Pending approval</p>
+                </div>
+                <span class="badge">Pending</span>
+              </div>
+              <div class="loan-card">
+                <div>
+                  <h4>KES 5,000</h4>
+                  <p>Completed · pure on-time record</p>
+                </div>
+                <span class="badge paid">Paid</span>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-nav">
+            <button class="nav-item" onclick="show('home')"><span class="ico">🏠</span>Home</button>
+            <button class="nav-item active" onclick="show('loans')"><span class="ico">📄</span>Loans</button>
+            <button class="nav-item" onclick="show('payments')"><span class="ico">💳</span>Pay</button>
+            <button class="nav-item" onclick="show('profile')"><span class="ico">👤</span>Me</button>
+          </div>
+        </div>
+
+        <!-- PAYMENTS -->
+        <div class="view" id="payments">
+          <div class="status"><span>9:41</span><span>LTE ●</span></div>
+          <div class="content" style="padding-top:20px">
+            <h2>Repay with M-Pesa</h2>
+            <p class="sub">STK Push to your registered number</p>
+            <div class="hero-card" style="background:linear-gradient(135deg,#12352a,#0B6E4F)">
+              <div class="kicker">Amount due</div>
+              <div class="amt">KES 11,150</div>
+            </div>
+            <label>Pay amount</label>
+            <input class="field" value="11150" />
+            <label>M-Pesa phone</label>
+            <input class="field" value="0712345678" />
+            <button class="btn" onclick="toast('STK Push initiated · check your phone (needs Daraja keys in production)')">Pay now</button>
+          </div>
+          <div class="bottom-nav">
+            <button class="nav-item" onclick="show('home')"><span class="ico">🏠</span>Home</button>
+            <button class="nav-item" onclick="show('loans')"><span class="ico">📄</span>Loans</button>
+            <button class="nav-item active" onclick="show('payments')"><span class="ico">💳</span>Pay</button>
+            <button class="nav-item" onclick="show('profile')"><span class="ico">👤</span>Me</button>
+          </div>
+        </div>
+
+        <!-- KYC -->
+        <div class="view" id="kyc">
+          <div class="status"><span>9:41</span><span>LTE ●</span></div>
+          <div class="content" style="padding-top:20px">
+            <div class="link" style="text-align:left;margin:0 0 12px" onclick="show('home')">← Back</div>
+            <h2>Verify identity</h2>
+            <p class="sub">National ID + selfie for higher limits</p>
+            <div class="loan-card" style="margin-bottom:12px"><div><h4>National ID front</h4><p>Tap to capture</p></div><span class="badge paid">Ready</span></div>
+            <div class="loan-card" style="margin-bottom:12px"><div><h4>National ID back</h4><p>Tap to capture</p></div><span class="badge">Needed</span></div>
+            <div class="loan-card" style="margin-bottom:18px"><div><h4>Selfie liveness</h4><p>Face match check</p></div><span class="badge">Needed</span></div>
+            <button class="btn" onclick="toast('KYC package queued for review'); show('profile')">Submit KYC</button>
+          </div>
+        </div>
+
+        <!-- PROFILE -->
+        <div class="view" id="profile">
+          <div class="status"><span>9:41</span><span>LTE ●</span></div>
+          <div class="content" style="padding-top:20px">
+            <h2>Profile</h2>
+            <p class="sub">Amina Wanjiku · 0712 345 678</p>
+            <div class="loan-list">
+              <div class="loan-card"><div><h4>Credit score</h4><p>Tier C · limit KES 15,000</p></div><span class="badge active">650</span></div>
+              <div class="loan-card" onclick="show('kyc')" style="cursor:pointer"><div><h4>KYC status</h4><p>In progress</p></div><span class="badge">Review</span></div>
+              <div class="loan-card"><div><h4>Security</h4><p>Change password · biometrics</p></div></div>
+              <div class="loan-card"><div><h4>Support</h4><p>WhatsApp · in-app chat</p></div></div>
+            </div>
+            <button class="btn secondary" style="margin-top:18px" onclick="show('login')">Sign out</button>
+          </div>
+          <div class="bottom-nav">
+            <button class="nav-item" onclick="show('home')"><span class="ico">🏠</span>Home</button>
+            <button class="nav-item" onclick="show('loans')"><span class="ico">📄</span>Loans</button>
+            <button class="nav-item" onclick="show('payments')"><span class="ico">💳</span>Pay</button>
+            <button class="nav-item active" onclick="show('profile')"><span class="ico">👤</span>Me</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <button class="active" data-v="login" onclick="show('login')">Login</button>
+    <button data-v="home" onclick="show('home')">Home</button>
+    <button data-v="apply" onclick="show('apply')">Apply</button>
+    <button data-v="loans" onclick="show('loans')">Loans</button>
+    <button data-v="payments" onclick="show('payments')">Pay</button>
+    <button data-v="profile" onclick="show('profile')">Profile</button>
+  </div>
+
+<script>
+  const API = 'http://127.0.0.1:8080';
+
+  function show(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.toolbar button').forEach(b => {
+      b.classList.toggle('active', b.dataset.v === id);
+    });
+  }
+
+  function demoEnter() { show('home'); toast('Demo mode — UI only until DB is up'); }
+
+  function setAmt(el, n) {
+    document.querySelectorAll('.chips button').forEach(b => b.classList.remove('on'));
+    el.classList.add('on');
+    document.getElementById('amtLabel').textContent = 'KES ' + n.toLocaleString();
+  }
+
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.display = 'block';
+    setTimeout(() => t.style.display = 'none', 2800);
+  }
+
+  async function ping() {
+    const dot = document.getElementById('apiDot');
+    const pill = document.getElementById('apiPillText');
+    const text = document.getElementById('apiStatusText');
+    try {
+      const r = await fetch(API + '/health', { cache: 'no-store' });
+      const j = await r.json();
+      if (j.status === 'ok') {
+        dot.className = 'dot ok';
+        pill.textContent = 'API online · ' + (j.service || 'zeni-api');
+        text.textContent = 'online (' + JSON.stringify(j) + ')';
+        return true;
+      }
+      throw new Error('bad');
+    } catch (e) {
+      dot.className = 'dot bad';
+      pill.textContent = 'API unreachable';
+      text.textContent = 'offline — start Go API on :8080';
+      return false;
+    }
+  }
+
+  async function tryLogin() {
+    document.getElementById('loginErr').textContent = '';
+    const ok = await ping();
+    if (!ok) {
+      document.getElementById('loginErr').textContent = 'API is down. Using demo home instead.';
+      setTimeout(() => show('home'), 700);
+      return;
+    }
+    // Attempt real login — may fail without DB
+    try {
+      const res = await fetch(API + '/api/v1/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          phone: document.getElementById('phone').value,
+          password: document.getElementById('password').value
+        })
+      });
+      if (res.ok) {
+        toast('Login succeeded');
+        show('home');
+      } else {
+        const body = await res.text();
+        document.getElementById('loginErr').textContent = 'API responded but auth needs Postgres. Entering demo.';
+        toast('Auth needs DB — demo home unlocked');
+        setTimeout(() => show('home'), 900);
+      }
+    } catch (e) {
+      document.getElementById('loginErr').textContent = 'Network error — demo unlocked';
+      show('home');
+    }
+  }
+
+  // Splash → login
+  setTimeout(() => show('login'), 1400);
+  ping();
+  setInterval(ping, 5000);
+</script>
+</body>
+</html>

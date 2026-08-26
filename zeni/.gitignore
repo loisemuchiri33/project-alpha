@@ -1,0 +1,81 @@
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+vendor/
+bin/
+dist/
+coverage.*
+*.coverprofile
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.iml
+*.ipr
+*.iws
+.settings/
+.project
+.classpath
+
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+**/doc/api/
+app.*.symbols
+app.*.map.json
+
+# Environment & secrets — never commit real values
+.env
+.env.*
+!.env.example
+!**/.env.example
+.env.local
+.env.production
+.env.staging
+.env.development
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets/
+credentials/
+**/secrets.yaml
+!infrastructure/k8s/secrets.yaml.example
+
+# Mobile signing
+*.jks
+*.keystore
+**/android/key.properties
+**/ios/Runner/GoogleService-Info.plist
+**/android/app/google-services.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs & local data
+*.log
+logs/
+tmp/
+.tmp/
+*.sqlite
+*.db
+
+# Docker local overrides
+docker-compose.override.yml

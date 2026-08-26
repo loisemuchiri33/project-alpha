@@ -1,0 +1,52 @@
+# Local development stack only — do NOT publish these ports on a public cloud VM.
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: zeni-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-zeni}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-zeni_dev_only_change_me}
+      POSTGRES_DB: ${POSTGRES_DB:-zeni}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-zeni}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: zeni-redis
+    command: redis-server --requirepass ${REDIS_PASSWORD:-zeni_dev_only_redis} --maxmemory 256mb --maxmemory-policy allkeys-lru
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-zeni_dev_only_redis}", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio:latest
+    container_name: zeni-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-zeni_minio}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-zeni_dev_only_minio_change}
+    ports:
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
+    volumes:
+      - miniodata:/data
+
+volumes:
+  pgdata:
+  redisdata:
+  miniodata:
