@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zeni — Smart Loans. Secure Future. | Download the Zeni App Kenya</title>
+  <meta name="description" content="Zeni is Kenya’s digital lending app. Fair, transparent loans disbursed to M-Pesa. Download free on Google Play and the App Store." />
+  <meta name="keywords" content="Zeni, Zeni Kenya, Zeni app, Zeni loan, download Zeni, Zeni M-Pesa, mobile loans Kenya" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://getzeni.ke/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Zeni" />
+  <meta property="og:url" content="https://getzeni.ke/" />
+  <meta property="og:title" content="Zeni — Smart Loans. Secure Future." />
+  <meta property="og:description" content="Download the Zeni app. Fair loans for everyday Kenyans — to M-Pesa." />
+  <meta property="og:image" content="https://getzeni.ke/assets/photos/hero.jpg" />
+  <meta property="og:locale" content="en_KE" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#01579B" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/Icon-512.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+/* Zeni — Editorial marketing site matching reference craft
+   Colours: official Zeni blues. CTAs: Download only.
+*/
+:root {
+  --blue-50:  #E1F5FE;
+  --blue-100: #B3E5FC;
+  --blue-200: #81D4FA;
+  --blue-300: #54C5F8;
+  --blue-400: #29B6F6;
+  --blue-500: #0777BD;
+  --blue-600: #01579B;
+  --blue-700: #014A82;
+  --blue-800: #013A66;
+  --blue-900: #0A1628;
+  --paper: #F7F9FC;
+  --paper-2: #EEF3F9;
+  --ink: #0F172A;
+  --muted: #5B6B7C;
+  --line: #D8E2EC;
+  --white: #FFFFFF;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Source Sans 3", "Inter", system-ui, sans-serif;
+  --shadow: 0 0 0 1px rgb(1 87 155 / 0.06), 0 8px 24px -12px rgb(1 87 155 / 0.14);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-sans); background: var(--paper); color: var(--ink); line-height: 1.6; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+.container { width: 100%; max-width: 72rem; margin: 0 auto; padding: 0 1.25rem; }
+@media (min-width: 640px) { .container { padding: 0 1.5rem; } }
+
+.announce {
+  background: var(--paper-2);
+  border-bottom: 1px solid color-mix(in srgb, var(--blue-400) 28%, transparent);
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--ink);
+  padding: 0.55rem 1rem;
+  opacity: 0.9;
+}
+
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 4.25rem; gap: 1rem; }
+.logo { display: flex; align-items: center; gap: 0.75rem; }
+.logo img { height: 36px; width: auto; }
+.logo-text { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; color: var(--blue-600); }
+.logo-sub { display: none; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-500); }
+@media (min-width: 640px) { .logo-sub { display: block; } }
+.nav-links { display: none; align-items: center; gap: 1.75rem; }
+.nav-links a { font-size: 0.9rem; font-weight: 500; color: color-mix(in srgb, var(--ink) 75%, transparent); transition: color 0.15s; }
+.nav-links a:hover { color: var(--ink); }
+@media (min-width: 960px) { .nav-links { display: flex; } }
+.nav-cta .btn { display: none; }
+@media (min-width: 640px) { .nav-cta .btn { display: inline-flex; } }
+.nav-toggle { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; background: none; border: none; cursor: pointer; }
+.nav-toggle span { display: block; width: 1.25rem; height: 2px; background: var(--ink); margin: 3px 0; }
+@media (min-width: 960px) { .nav-toggle { display: none; } }
+.nav.open .nav-links {
+  display: flex; flex-direction: column; position: absolute;
+  top: 4.25rem; left: 0; right: 0; background: var(--paper);
+  padding: 1.25rem 1.5rem 1.5rem; border-bottom: 1px solid var(--line); gap: 1rem;
+}
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  font-weight: 600; font-size: 0.9rem; padding: 0.7rem 1.25rem;
+  border-radius: var(--radius-md); transition: all 0.18s ease; white-space: nowrap; border: none; cursor: pointer;
+}
+.btn-primary { background: var(--blue-600); color: white; box-shadow: 0 4px 14px rgb(1 87 155 / 0.28); }
+.btn-primary:hover { background: var(--blue-700); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: white; border: 1.5px solid color-mix(in srgb, white 45%, transparent); }
+.btn-outline:hover { background: color-mix(in srgb, white 12%, transparent); border-color: white; }
+.btn-outline-dark { background: transparent; color: var(--blue-600); border: 1.5px solid var(--blue-200); }
+.btn-outline-dark:hover { background: var(--blue-50); border-color: var(--blue-400); }
+.btn-lg { padding: 0.9rem 1.5rem; font-size: 1rem; }
+
+.store-badge {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  background: var(--blue-900); color: white; padding: 0.8rem 1.25rem;
+  border-radius: 12px; transition: transform 0.18s, box-shadow 0.18s; min-width: 168px;
+}
+.store-badge:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgb(10 22 40 / 0.28); }
+.store-badge .label { font-size: 0.65rem; opacity: 0.75; line-height: 1.15; }
+.store-badge .store { font-size: 1rem; font-weight: 600; line-height: 1.15; }
+
+.hero {
+  position: relative; min-height: 92vh; overflow: hidden;
+  background: var(--blue-900); color: white;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% center; }
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, rgb(10 22 40 / 0.94) 0%, rgb(10 22 40 / 0.78) 42%, rgb(10 22 40 / 0.28) 100%);
+}
+.hero-content { position: relative; z-index: 2; padding: 7rem 0 4rem; }
+.hero-badge {
+  display: inline-flex; width: fit-content;
+  border: 1px solid color-mix(in srgb, var(--blue-300) 45%, transparent);
+  background: rgb(10 22 40 / 0.5); color: var(--blue-200);
+  font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 0.35rem 0.85rem; border-radius: 999px;
+}
+.hero h1 {
+  margin-top: 1.35rem; max-width: 18ch;
+  font-size: clamp(2.75rem, 6.5vw, 4.5rem); font-weight: 500;
+  line-height: 0.95; letter-spacing: -0.03em;
+}
+.hero .swahili {
+  margin-top: 1.15rem; max-width: 28rem;
+  font-family: var(--font-display); font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-style: italic; color: color-mix(in srgb, white 85%, transparent); font-weight: 500;
+}
+.hero-actions { margin-top: 1.85rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.hero-stats {
+  margin-top: 3rem; max-width: 36rem; display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem; border-top: 1px solid color-mix(in srgb, white 18%, transparent); padding-top: 1.75rem;
+}
+.hero-stats .n { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; }
+.hero-stats .l { font-size: 0.78rem; opacity: 0.75; margin-top: 0.15rem; }
+
+.section { padding: 5rem 0; }
+.eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue-500); }
+.section h2 { margin-top: 0.6rem; font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 500; }
+.lead { margin-top: 0.85rem; font-size: 1.1rem; color: var(--muted); max-width: 36rem; line-height: 1.65; }
+
+.product-grid { display: grid; gap: 3rem; align-items: center; }
+@media (min-width: 900px) { .product-grid { grid-template-columns: 1fr 1fr; } }
+.product-grid img { width: 100%; height: 420px; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow); }
+
+.features-grid { display: grid; gap: 1.25rem; margin-top: 2.5rem; }
+@media (min-width: 700px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
+.feature-card {
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  padding: 1.6rem; transition: box-shadow 0.2s, transform 0.2s;
+}
+.feature-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.feature-card h3 { font-size: 1.2rem; margin-bottom: 0.45rem; }
+.feature-card p { font-size: 0.925rem; color: var(--muted); }
+
+.steps { display: grid; gap: 2rem; margin-top: 2.5rem; }
+@media (min-width: 700px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+.step { text-align: center; padding: 0 0.5rem; }
+.step-num {
+  width: 3.25rem; height: 3.25rem; margin: 0 auto 1.15rem; border-radius: 50%;
+  background: var(--blue-600); color: white; display: grid; place-items: center;
+  font-family: var(--font-display); font-size: 1.25rem; font-weight: 600;
+  box-shadow: 0 8px 20px rgb(1 87 155 / 0.25);
+}
+.step h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+.step p { font-size: 0.925rem; color: var(--muted); }
+
+.story-grid { display: grid; gap: 1.5rem; margin-top: 2.5rem; }
+@media (min-width: 800px) { .story-grid { grid-template-columns: repeat(3, 1fr); } }
+.story-card {
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  overflow: hidden; transition: transform 0.22s, box-shadow 0.22s;
+}
+.story-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.story-card img { width: 100%; height: 220px; object-fit: cover; }
+.story-card .body { padding: 1.35rem 1.4rem 1.5rem; }
+.story-card h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+.story-card p { font-size: 0.9rem; color: var(--muted); }
+.story-card .meta { margin-top: 0.85rem; font-size: 0.75rem; color: var(--blue-500); font-weight: 600; }
+
+.download-band {
+  background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-900) 100%);
+  color: white; text-align: center; padding: 5rem 0;
+}
+.download-band h2 { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 500; }
+.download-band p { margin: 0.85rem auto 1.75rem; max-width: 28rem; opacity: 0.9; }
+.download-band .store-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.85rem; }
+
+.footer { background: var(--blue-900); color: color-mix(in srgb, white 78%, transparent); padding: 3.5rem 0 1.75rem; }
+.footer-grid { display: grid; gap: 2rem; margin-bottom: 2.5rem; }
+@media (min-width: 700px) { .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; } }
+.footer .logo-text { color: white; }
+.footer p { margin-top: 0.85rem; font-size: 0.875rem; max-width: 16rem; line-height: 1.55; }
+.footer h4 { color: white; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.9rem; }
+.footer a { font-size: 0.875rem; display: block; margin-bottom: 0.45rem; transition: color 0.15s; }
+.footer a:hover { color: var(--blue-200); }
+.footer-bottom {
+  border-top: 1px solid color-mix(in srgb, white 12%, transparent);
+  padding-top: 1.35rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem; font-size: 0.8rem;
+}
+
+.page-hero { background: var(--paper-2); padding: 4rem 0 3rem; text-align: center; border-bottom: 1px solid var(--line); }
+.page-hero h1 { font-size: clamp(2.25rem, 4vw, 3.25rem); font-weight: 500; }
+.page-hero .lead { margin: 0.75rem auto 0; }
+.text-center { text-align: center; }
+.mt-2 { margin-top: 2rem; }
+.mt-3 { margin-top: 3rem; }
+
+</style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"Zeni","alternateName":["Zeni Kenya","Zeni App"],"url":"https://getzeni.ke","logo":"https://getzeni.ke/assets/Icon-512.png","description":"Zeni is a digital lending platform for Kenya. Fair loans disbursed to M-Pesa."}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"MobileApplication","name":"Zeni","operatingSystem":"Android, iOS","applicationCategory":"FinanceApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"KES"},"description":"Zeni — Smart loans. Secure future. Download free on Google Play and the App Store.","url":"https://getzeni.ke"}
+  </script>
+</head>
+<body>
+
+  <div class="announce">
+    Digital credit for Kenya · Fair, transparent, disbursed to M-Pesa
+  </div>
+
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/zeni-logo-512.png" alt="Zeni" width="36" height="42" />
+        <span>
+          <span class="logo-text">Zeni</span>
+          <span class="logo-sub">Smart loans · Kenya</span>
+        </span>
+      </a>
+      <nav class="nav-links">
+        <a href="how-it-works.html">How it works</a>
+        <a href="features.html">Features</a>
+        <a href="stories.html">Stories</a>
+        <a href="security.html">Security</a>
+        <a href="about.html">About</a>
+        <a href="support.html">Support</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="how-it-works.html#get-app" class="btn btn-primary">Download app</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- HERO — full-bleed photo, editorial -->
+  <section class="hero">
+    <img class="hero-bg" src="assets/photos/hero.jpg" alt="Zeni — everyday Kenyans" />
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <p class="hero-badge">Digital credit · Kenya 2026</p>
+      <h1>Smart loans.<br>Secure future.</h1>
+      <p class="swahili">Msaidizi wako wa kifedha kila siku</p>
+      <div class="hero-actions" id="download">
+        <a href="https://play.google.com/store/apps/details?id=com.zeni.app" class="store-badge" target="_blank" rel="noopener">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c-.18-.1-.3-.28-.3-.5V.74c0-.22.12-.4.3-.5l11.66 11.76L3.18 23.76zm1.12.5l11.2-6.35-2.6-2.62L4.3 24.26zm13.4-7.58l-2.9-2.92 2.9-2.92 3.7 2.1c.5.28.5.98 0 1.26l-3.7 2.48zM4.3-.26l8.6 8.68 2.6-2.62L4.3-.26z"/></svg>
+          <div><div class="label">GET IT ON</div><div class="store">Google Play</div></div>
+        </a>
+        <a href="https://apps.apple.com/app/zeni" class="store-badge" target="_blank" rel="noopener">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div><div class="label">Download on the</div><div class="store">App Store</div></div>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="n">M-Pesa</div><div class="l">Direct disbursement</div></div>
+        <div><div class="n">Minutes</div><div class="l">Typical decision</div></div>
+        <div><div class="n">Transparent</div><div class="l">Full cost shown first</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT -->
+  <section class="section">
+    <div class="container product-grid">
+      <div>
+        <p class="eyebrow">The product</p>
+        <h2>Built for how Kenyans actually live</h2>
+        <p class="lead">School fees, stock for the kiosk, an unexpected bill — Zeni is designed so the money arrives on M-Pesa clearly and without theatre.</p>
+        <div class="mt-2" style="display:flex;flex-wrap:wrap;gap:0.75rem;">
+          <a href="how-it-works.html" class="btn btn-primary">See how it works</a>
+          <a href="stories.html" class="btn btn-outline-dark">Read stories</a>
+        </div>
+      </div>
+      <img src="assets/photos/kiosk.jpg" alt="Kenyan kiosk and small business" />
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" style="background: var(--paper-2);">
+    <div class="container">
+      <p class="eyebrow">Why Zeni</p>
+      <h2>Clear. Fast. On your phone.</h2>
+      <p class="lead">Everything that matters — pricing, timing, repayment — is designed to be obvious from the first screen.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Instant to M-Pesa</h3>
+          <p>Approved funds go straight to your registered M-Pesa number. No bank account required.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Transparent pricing</h3>
+          <p>See the full cost before you accept. No hidden fees, no last-minute surprises.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Secure by design</h3>
+          <p>Encryption and careful controls protect your data. We do not sell your information.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Limit that grows</h3>
+          <p>On-time repayment is recognised. Higher amounts unlock as your history builds.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Flexible terms</h3>
+          <p>Choose windows that fit how money actually moves in your week or month.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Local support</h3>
+          <p>Help that understands Kenyan customers and M-Pesa workflows.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow text-center" style="display:block;">Simple path</p>
+      <h2 class="text-center">Three steps to your phone</h2>
+      <p class="lead text-center" style="margin-left:auto;margin-right:auto;">From download to money on M-Pesa — built to be fast and clear.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Download the app</h3>
+          <p>Free on Google Play and the App Store. Install in under a minute.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Complete your profile</h3>
+          <p>Quick verification with your phone number and basic details.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>See your offer</h3>
+          <p>Review the full cost and terms. Accept and receive funds on M-Pesa.</p>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <a href="how-it-works.html" class="btn btn-primary btn-lg">See how Zeni works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORIES -->
+  <section class="section" style="background: var(--paper-2);">
+    <div class="container">
+      <p class="eyebrow">Stories</p>
+      <h2>Real people. Real progress.</h2>
+      <p class="lead">Kenyans using Zeni for the moments that matter.</p>
+      <div class="story-grid">
+        <div class="story-card">
+          <img src="assets/photos/kiosk.jpg" alt="Kiosk owner" />
+          <div class="body">
+            <h3>“Stock arrived the same day”</h3>
+            <p>I needed to restock before the weekend rush. The offer was clear and the money hit my M-Pesa fast.</p>
+            <div class="meta">Eastleigh, Nairobi · Small business</div>
+          </div>
+        </div>
+        <div class="story-card">
+          <img src="assets/photos/tailor.jpg" alt="Tailor" />
+          <div class="body">
+            <h3>“Fabric in bulk, not meter by meter”</h3>
+            <p>A working-capital loan let me buy wholesale before school-uniform season. The margin paid the loan.</p>
+            <div class="meta">Thika Road · Tailor</div>
+          </div>
+        </div>
+        <div class="story-card">
+          <img src="assets/photos/boda.jpg" alt="Boda operator" />
+          <div class="body">
+            <h3>“No office, no queue”</h3>
+            <p>The phone pinged, I approved, and the money was there. Exactly what I needed for fuel and a tyre.</p>
+            <div class="meta">Machakos · Rider</div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-2">
+        <a href="stories.html" class="btn btn-outline-dark">More stories</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD BAND -->
+  <section class="download-band">
+    <div class="container">
+      <h2>A clearer way to borrow</h2>
+      <p>Zeni is built for everyday Kenyans — fair terms, M-Pesa disbursement, and full cost shown before you accept. Learn how it works, then get the app when you’re ready.</p>
+      <div class="store-row">
+        <a href="how-it-works.html" class="btn btn-lg" style="background:white;color:#01579B;">How Zeni works</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="logo">
+            <img src="assets/zeni-logo-512.png" alt="" width="32" height="38" style="filter:brightness(0) invert(1)" />
+            <span class="logo-text">Zeni</span>
+          </a>
+          <p>Smart loans for everyday Kenyans. Fair, transparent, delivered to M-Pesa.</p>
+        </div>
+        <div>
+          <h4>Product</h4>
+          <a href="how-it-works.html">How it works</a>
+          <a href="features.html">Features</a>
+          <a href="stories.html">Stories</a>
+          <a href="how-it-works.html">How it works</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="about.html">About</a>
+          <a href="security.html">Security</a>
+          <a href="support.html">Support</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Zeni. All rights reserved.</div>
+        <div>getzeni.ke</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
